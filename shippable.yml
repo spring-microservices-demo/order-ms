@@ -7,18 +7,18 @@ jdk:
 
 build:
 
-  pre_ci:
-    - echo "this is master branch"
-
   ci:
-    - java -version
-    - mvn --version
     - mvn clean install -DskipTests
     - mvn sonar:sonar
     - docker build -t dockerregistry.hclets.com/ms_order:latest .
 
   post_ci:
-    - ls -a
-    - pwd
+    - docker push dockerregistry.hclets.com/ms_order:latest
 
-  cache: true
+integrations:
+  hub:
+    - integrationName: hcl-registry
+      type: "private docker registry"
+
+env: 
+  - secure: JGpME+/yPInzSoM7M1KPLMgPo8yGraMWVrK+6eb+Cc7aI1mkDXujXyr/WIsu6gBacCAJTp3Pk1DDfHXA//Kr2bt5GqMglHzBbaeEQztKBClUkMhU1H6EoMY3yy7zAGWSMaEaGX6puycaVycdMx0fkLnWQFY/xgM1XtVwyM2GVN/LRkSVrZClVqhK4OK5CrJjS5BrMdwt7R4gbtmWOst/c+BfCWjB6KuXzS8CybmxKitKj44JNgNGqSIWYvogpen/hWCD/u7yFOd6BNV+LytbcCjELzKOzX49yacWOwXhAr68K/VdOIq8WlBWh+cCRVaUcOFdwG6vPRecxRnarCqKXQ==
