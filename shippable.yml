@@ -15,7 +15,7 @@ build:
     - mvn --version
     - mvn clean install -DskipTests
     - mvn sonar:sonar
-    - docker build -t ms_order .
+    - docker build -t dockerregistry.hclets.com/ms_order:latest .
 
   post_ci:
     - ls -a
