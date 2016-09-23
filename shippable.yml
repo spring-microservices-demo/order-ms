@@ -14,6 +14,7 @@ build:
     - java -version
     - mvn --version
     - mvn clean install -DskipTests
+    - mvn sonar:sonar
     - docker build -t ms_order .
 
   post_ci:
