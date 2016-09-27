@@ -21,5 +21,12 @@ integrations:
     - integrationName: myregistry
       type: docker
 
+  notifications:
+    - integrationName: triggerOrderPipeline #Replace with name of the integration from subscription settings
+      type: webhook
+      payload:
+        - versionName=$BRANCH.$BUILD_NUMBER  #Replace with the tag of the image you pushed during CI  
+      on_success: always
+      on_failure: never
 env: 
   - secure: JGpME+/yPInzSoM7M1KPLMgPo8yGraMWVrK+6eb+Cc7aI1mkDXujXyr/WIsu6gBacCAJTp3Pk1DDfHXA//Kr2bt5GqMglHzBbaeEQztKBClUkMhU1H6EoMY3yy7zAGWSMaEaGX6puycaVycdMx0fkLnWQFY/xgM1XtVwyM2GVN/LRkSVrZClVqhK4OK5CrJjS5BrMdwt7R4gbtmWOst/c+BfCWjB6KuXzS8CybmxKitKj44JNgNGqSIWYvogpen/hWCD/u7yFOd6BNV+LytbcCjELzKOzX49yacWOwXhAr68K/VdOIq8WlBWh+cCRVaUcOFdwG6vPRecxRnarCqKXQ==
