@@ -10,10 +10,11 @@ build:
   ci:
     - mvn clean install -DskipTests
     - mvn sonar:sonar
-    - docker build -t hrishi/ms_order:latest .
+    - export IMAGE_NAME=hrishi/ms_order
+    - docker build -t $IMAGE_NAME:$BRANCH.$BUILD_NUMBER .
 
   post_ci:
-    - docker push hrishi/ms_order:latest
+    - docker push $IMAGE_NAME:$BRANCH.$BUILD_NUMBER
 
 integrations:
   hub:
