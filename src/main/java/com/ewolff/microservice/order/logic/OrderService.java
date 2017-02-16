@@ -7,7 +7,7 @@ import com.ewolff.microservice.order.clients.CatalogClient;
 import com.ewolff.microservice.order.clients.CustomerClient;
 
 @Service
-class OrderService {
+public class OrderService {
 
 	private OrderRepository orderRepository;
 	private CustomerClient customerClient;

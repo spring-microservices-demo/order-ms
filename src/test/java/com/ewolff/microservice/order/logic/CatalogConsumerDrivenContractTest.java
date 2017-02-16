@@ -33,8 +33,8 @@ public class CatalogConsumerDrivenContractTest {
 		assertEquals(
 				1,
 				result.stream()
-						.filter(i -> (i.getName().equals("iPod")
-								&& i.getPrice() == 42.0 && i.getItemId() == 1))
+						.filter(i -> (i.getName().equals("Xiomi")
+								&& i.getPrice() == 45.0 && i.getItemId() == 1))
 						.count());
 	}
 

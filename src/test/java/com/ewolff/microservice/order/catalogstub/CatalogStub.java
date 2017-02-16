@@ -24,14 +24,14 @@ public class CatalogStub {
 		if (id != 1) {
 			return new ResponseEntity<Item>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Item>(new Item(1, "iPod", 42.0),
+		return new ResponseEntity<Item>(new Item(1, "Xiomi", 45.0),
 				HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public PagedResources<Item> getAll() {
 		return new PagedResources<Item>(
-				Arrays.asList(new Item(1, "iPod", 42.0)), new PageMetadata(1,
+				Arrays.asList(new Item(1, "Xiomi", 45.0)), new PageMetadata(1,
 						0, 1));
 	}
 

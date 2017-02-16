@@ -18,7 +18,7 @@ import com.ewolff.microservice.order.clients.CatalogClient;
 
 @Entity
 @Table(name = "ORDERTABLE")
-class Order {
+public class Order {
 	
 
 	@Id
@@ -35,6 +35,12 @@ class Order {
 		orderLine = new ArrayList<OrderLine>();
 	}
 
+	public Order(long customerId) {
+		super();
+		this.customerId = customerId;
+		this.orderLine = new ArrayList<OrderLine>();
+	}
+	
 	public void setId(long id) {
 		this.id = id;
 	}
@@ -53,12 +59,6 @@ class Order {
 
 	public List<OrderLine> getOrderLine() {
 		return orderLine;
-	}
-
-	public Order(long customerId) {
-		super();
-		this.customerId = customerId;
-		this.orderLine = new ArrayList<OrderLine>();
 	}
 
 	public void setOrderLine(List<OrderLine> orderLine) {

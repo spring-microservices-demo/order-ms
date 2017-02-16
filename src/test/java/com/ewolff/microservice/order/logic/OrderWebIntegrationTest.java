@@ -3,15 +3,21 @@ package com.ewolff.microservice.order.logic;
 import static org.junit.Assert.*;
 
 import java.net.URI;
+import java.util.Arrays;
 import java.util.stream.StreamSupport;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -32,8 +38,8 @@ import com.ewolff.microservice.order.logic.OrderRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = OrderApp.class)
-@WebAppConfiguration
 @IntegrationTest
+@WebAppConfiguration
 @ActiveProfiles("test")
 public class OrderWebIntegrationTest {
 
@@ -59,7 +65,7 @@ public class OrderWebIntegrationTest {
 	public void setup() {
 		item = catalogClient.findAll().iterator().next();
 		customer = customerClient.findAll().iterator().next();
-		assertEquals("Eberhard", customer.getFirstname());
+		assertEquals("Mohandas", customer.getFirstname());
 	}
 
 	@Test
@@ -70,16 +76,25 @@ public class OrderWebIntegrationTest {
 					.stream(orders.spliterator(), false)
 					.noneMatch(
 							o -> (o.getCustomerId() == customer.getCustomerId())));
-			ResponseEntity<String> resultEntity = restTemplate.getForEntity(
-					orderURL(), String.class);
+			
+			HttpHeaders headers = new HttpHeaders();
+			headers.setAccept(Arrays.asList(MediaType.TEXT_HTML));
+
+			HttpEntity<String> entity = new HttpEntity<String>("parameters",
+					headers);
+			
+			ResponseEntity<String> resultEntity = restTemplate.exchange(orderURL(),
+					HttpMethod.GET, entity, String.class);
+			
+			
 			assertTrue(resultEntity.getStatusCode().is2xxSuccessful());
 			String orderList = resultEntity.getBody();
-			assertFalse(orderList.contains("Eberhard"));
+			assertFalse(orderList.contains("Mohandas"));
 			Order order = new Order(customer.getCustomerId());
 			order.addLine(42, item.getItemId());
 			orderRepository.save(order);
 			orderList = restTemplate.getForObject(orderURL(), String.class);
-			assertTrue(orderList.contains("Eberhard"));
+			assertTrue(orderList.contains("Mohandas"));
 		} finally {
 			orderRepository.deleteAll();
 		}
@@ -105,7 +120,7 @@ public class OrderWebIntegrationTest {
 		map.add("submit", "");
 		map.add("customerId", Long.toString(customer.getCustomerId()));
 		map.add("orderLine[0].itemId", Long.toString(item.getItemId()));
-		map.add("orderLine[0].count", "42");
+		map.add("orderLine[0].count", "45");
 		URI uri = restTemplate.postForLocation(orderURL(), map, String.class);
 		UriTemplate uriTemplate = new UriTemplate(orderURL() + "/{id}");
 		assertEquals(before + 1, orderRepository.count());

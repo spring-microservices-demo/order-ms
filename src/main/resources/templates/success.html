@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-  layout:decorator="layout">
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout">
 <head>
 <title>Success</title>
-<link rel="stylesheet" href="css/bootstrap.min.css" />
-<script
-  src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-  <h1 layout:fragment="header" style="margin-top:55px;margin-left:10px;font-family:Arial Bold Italic;">Success</h1>
+	<h1 layout:fragment="header">Success</h1>
 	<div layout:fragment="content" class="container">
 		Action was successful!
 	</div>
