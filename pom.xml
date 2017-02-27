@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.0.RELEASE</version>
+		<version>1.3.5.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -17,7 +17,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<spring-cloud.version>Camden.RELEASE</spring-cloud.version>
+		<spring-cloud.version>Brixton.RELEASE</spring-cloud.version>
 		<docker.image.prefix>hrishike</docker.image.prefix>
 	</properties>
 
@@ -26,7 +26,7 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-starter-parent</artifactId>
-				<version>Camden.RELEASE</version>
+				<version>Brixton.RELEASE</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
