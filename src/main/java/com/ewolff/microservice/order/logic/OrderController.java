@@ -47,8 +47,9 @@ public class OrderController {
 		return customerClient.findAll();
 	}
 
-	@RequestMapping("/")
+	@RequestMapping("/order")
 	public ModelAndView orderList() {
+		System.out.println("IN Order list");
 		return new ModelAndView("orderlist", "orders",
 				orderRepository.findAll());
 	}

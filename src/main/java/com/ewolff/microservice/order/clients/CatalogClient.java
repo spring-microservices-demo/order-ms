@@ -70,7 +70,7 @@ public class CatalogClient {
 				Collections.<HttpMessageConverter<?>> singletonList(converter));
 	}
 
-	@HystrixCommand(fallbackMethod = "priceCache", commandProperties = { @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2") })
+//	@HystrixCommand(fallbackMethod = "priceCache", commandProperties = { @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2") })
 	public double price(long itemId) {
 		return getOne(itemId).getPrice();
 	}
@@ -79,7 +79,7 @@ public class CatalogClient {
 		return getOneCache(itemId).getPrice();
 	}
 
-	@HystrixCommand(fallbackMethod = "getItemsCache", commandProperties = { @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2") })
+//	@HystrixCommand(fallbackMethod = "getItemsCache", commandProperties = { @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2") })
 	public Collection<Item> findAll() {
 		PagedResources<Item> pagedResources = restTemplate.getForObject(
 				catalogURL(), ItemPagedResources.class);
