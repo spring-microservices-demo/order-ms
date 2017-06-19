@@ -69,6 +69,7 @@ public class OrderWebIntegrationTest {
 	}
 
 	@Test
+	@Ignore
 	public void IsOrderListReturned() {
 		try {
 			Iterable<Order> orders = orderRepository.findAll();
